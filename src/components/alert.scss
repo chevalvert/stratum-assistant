@@ -1,0 +1,67 @@
+$fall-distance: 2rem;
+
+@keyframes fall {
+  from {
+    opacity: 0;
+    transform: translateY($fall-distance);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.alert-overlay {
+  z-index: 9;
+  position: fixed;
+
+  top: -$fall-distance;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background: rgba(0, 0, 0, 0.3);
+
+  animation: fall ease-out 1;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+}
+
+.alert {
+  position: absolute;
+  top: calc(50% - 2rem);
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+
+  width: 600px;
+  height: auto;
+
+  background: $black;
+  color: $white;
+  padding: 2rem;
+
+  .alert-message {
+    padding: 1em 0;
+    line-height: 1.3em;
+    white-space: pre-line;
+
+    p:not(:first-child) {
+      margin-top: 1em;
+    }
+  }
+
+  .alert-footer {
+    text-align: right;
+    button {
+      margin-left: 1rem;
+    }
+  }
+}
+
+.alert[data-color] {
+  border-top: 1rem solid;
+  &[data-color='green'] { border-color: $green; }
+  &[data-color='yellow'] { border-color: $yellow; }
+  &[data-color='red'] { border-color: $red; }
+}

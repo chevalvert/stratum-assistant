@@ -1,0 +1,72 @@
+.breadcrumb {
+  cursor: default;
+  -webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+
+  background: $black;
+  color: $white;
+
+  display: flex;
+  counter-reset: breadcrumb-counter;
+
+  li {
+    counter-increment: breadcrumb-counter;
+    color: $black;
+
+    padding: 0;
+    border: none;
+    margin: 0;
+
+    white-space: no-wrap;
+    * { display: inline-block; }
+
+    &:not(:first-child) { border-left: 3px solid $black; }
+
+    &::before {
+      content: counter(breadcrumb-counter);
+      display: inline-block;
+      color: $black;
+      background: $gray;
+      padding: 1rem 2rem;
+    }
+
+    header {
+      display: none;
+      padding: 1rem 2rem;
+      background: $gray;
+      color: $black;
+    }
+
+    .breadcrumb-content {
+      display: none;
+      padding: 1rem 2rem;
+      background: $black;
+      color: $white;
+    }
+
+    .breadcrumb-buttons {
+      display: none;
+    }
+
+    button {
+      display: inline-block;
+      padding: 1.2rem 2rem;
+      &:not(:first-child) { margin-left: 3px; }
+    }
+  }
+
+  li.is-active {
+    flex: 1;
+    &::before { display: none; }
+    header {
+      &::before { content: counter(breadcrumb-counter)' - '; }
+      display: inline-block;
+      background: $yellow;
+    }
+    .breadcrumb-content, .breadcrumb-buttons { display: inline-block; }
+  }
+}
