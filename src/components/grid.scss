@@ -1,0 +1,52 @@
+@keyframes pulse {
+  from { transform: translateX(-50%) translateY(-40%); }
+  to { transform: translateX(-50%) translateY(-60%); }
+}
+
+svg.grid {
+  position: fixed;
+  top: calc(50% - 3rem);
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+
+  width: 80vmin;
+  height: 80vmin;
+
+  padding: 2rem;
+
+  line {
+    stroke: $gray;
+    stroke-width: 1px;
+  }
+
+  rect {
+    width: 3rem;
+    height: 3rem;
+    transform-origin: 50% 50%;
+    transform: translateX(-50%) translateY(-50%);
+
+    fill: $gray;
+    @include easing(200ms, fill);
+
+    &.was-not-validated { fill: mix($red, $gray, 30%); }
+
+    &:hover {
+      fill: $black;
+      cursor: pointer;
+      animation: pulse 500ms infinite;
+      animation-direction: alternate;
+      animation-timing-function: ease-in-out;
+    }
+
+    &.is-mapped { fill: $yellow; }
+    &.is-active {
+      fill: $black;
+      animation: pulse 500ms infinite;
+      animation-direction: alternate;
+      animation-timing-function: ease-in-out;
+    }
+    &.is-validated { fill: $green; }
+    &.is-not-validated { fill: $red; }
+    &.is-disabled { pointer-events: none; }
+  }
+}

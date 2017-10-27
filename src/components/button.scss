@@ -1,0 +1,19 @@
+button {
+  // reset
+  border: 0;
+  &:hover { cursor: pointer; }
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+
+  background: $white;
+  color: $black;
+  padding: 1.5rem 2rem;
+}
+
+button[data-color='green'] { background-color: $green; }
+button[data-color='yellow'] { background-color: $yellow; }
+button[data-color='red'] { background-color: $red; }
