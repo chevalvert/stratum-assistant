@@ -20,7 +20,8 @@ export default function (state, next) {
     buttons: [
       new Button('start mapping', {
         color: 'green',
-        onclick: () => {
+        onclick: e => {
+          e.preventDefault()
           alert.destroy()
           keyboard.off('enter')
           next(null, state)

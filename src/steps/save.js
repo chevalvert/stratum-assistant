@@ -14,7 +14,8 @@ function say (nodes) {
       buttons: [
         new Button('save', {
           color: 'green',
-          onclick: () => {
+          onclick: e => {
+            e.preventDefault()
             ws.on('saved', err => {
               if (err) reject(err)
               else {

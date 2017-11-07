@@ -21,7 +21,8 @@ function speak () {
       buttons: [
         new Button('ok', {
           color: 'green',
-          onclick: () => {
+          onclick: e => {
+            e.preventDefault()
             alert.destroy()
             keyboard.off('enter')
             resolve()
@@ -50,7 +51,8 @@ export default function (state) {
       breadcrumb.setButtons([
         new Button(`<i class='fa fa-trash'></i>`, {
           color: 'red',
-          onclick: () => {
+          onclick: e => {
+            e.preventDefault()
             state.trashed.push(current)
             validate()
           }
@@ -73,6 +75,7 @@ export default function (state) {
         if (state.mappable.length) {
           current = state.mappable.shift()
           ws.send('blackout')
+          state.mapped.forEach(n => ws.send('light', {name: n.node.name, index: n.index, color: [50, 50, 0]}))
           ws.send('light', {name: current.node.name, index: current.index})
           breadcrumb.setText(`${current.node.name}#${current.index}`)
         } else {

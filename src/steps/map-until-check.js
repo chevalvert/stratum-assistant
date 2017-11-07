@@ -19,7 +19,8 @@ function speak (len) {
       buttons: [
         new Button('ok', {
           color: 'green',
-          onclick: () => {
+          onclick: e => {
+            e.preventDefault()
             alert.destroy()
             keyboard.off('enter')
             resolve()

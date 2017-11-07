@@ -20,7 +20,8 @@ function speak () {
       buttons: [
       new Button('ok', {
         color: 'green',
-        onclick: () => {
+        onclick: e => {
+          e.preventDefault()
           alert.destroy()
           keyboard.off('enter')
           resolve()
@@ -41,7 +42,7 @@ export default function (state) {
     breadcrumb.select(2)
 
     grid.boxes.forEach(box => {
-      box.disable(true)
+      box.disable()
     })
 
     speak().then(() => {
@@ -55,11 +56,17 @@ export default function (state) {
       breadcrumb.setButtons([
         new Button(`<i class='fa fa-times'></i>`, {
           color: 'red',
-          onclick: () => rejectBox()
+          onclick: e => {
+            e.preventDefault()
+            rejectBox()
+          }
         }),
         new Button(`<i class='fa fa-check'></i>`, {
           color: 'green',
-          onclick: () => validateBox()
+          onclick: e => {
+            e.preventDefault()
+            validateBox()
+          }
         })
       ])
 

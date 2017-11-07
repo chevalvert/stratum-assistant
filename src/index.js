@@ -11,8 +11,6 @@ import success from 'steps/success'
 
 import ws from 'utils/websocket'
 
-ws.on('newnode', () => location.reload())
-
 waterfall(
   [
     init,
