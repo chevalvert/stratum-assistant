@@ -60,15 +60,24 @@ export default function (state) {
       ])
 
       grid.on('click', box => {
-        if (!box.mapped) {
-          // @NOTE: .was-not-validated comes from steps/map-until-check recursion
-          box.removeClass('was-not-validated')
-          box.setMapping(true)
-          box.disable()
-          current.box = box
-          state.mapped.push(current)
-          validate()
+        if (box.mapped) {
+          // move node from state.mapped to state.mappable
+          const index = state.mapped.findIndex(n => {
+            return n.box.position.i === box.position.i && n.box.position.j === box.position.j
+          })
+          const removedNotes = state.mapped.splice(index, 1)
+          removedNotes.forEach(n => state.mappable.push(n))
         }
+
+        console.log(state.mappable.length, state.mapped.length)
+
+        // NOTE .was-not-validated comes from steps/map-until-check recursion
+        box.removeClass('was-not-validated')
+        box.setMapping(true)
+        current.box = box
+
+        state.mapped.push(current)
+        validate()
       })
 
       function validate () {
