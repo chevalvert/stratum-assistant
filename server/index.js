@@ -26,7 +26,7 @@ web.on('light', data => {
   }
 })
 web.on('save', data => {
-  fs.outputJson(path.join(args.output, 'config.mapping.json'), data, { spaces: 2 }, err => {
+  fs.outputJson(path.join(args.output, 'stratum.mapping.json'), { nodes: data }, { spaces: 2 }, err => {
     web.broadcast('saved', err)
   })
 })
