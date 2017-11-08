@@ -69,8 +69,6 @@ export default function (state) {
           removedNotes.forEach(n => state.mappable.push(n))
         }
 
-        console.log(state.mappable.length, state.mapped.length)
-
         // NOTE .was-not-validated comes from steps/map-until-check recursion
         box.removeClass('was-not-validated')
         box.setMapping(true)
