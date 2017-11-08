@@ -1,6 +1,6 @@
 @keyframes pulse {
-  from { transform: translateX(-50%) translateY(-40%); }
-  to { transform: translateX(-50%) translateY(-60%); }
+  from { transform: translateX(-50%) translateY(-50%) scale(1); }
+  to { transform: translateX(-50%) translateY(-50%) scale(1.2); }
 }
 
 svg.grid {
