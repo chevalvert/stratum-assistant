@@ -16,7 +16,11 @@ export default function (next) {
       trashed: [],   // strips that are not plugged
 
       // strips to be mapped
-      mappable: nodes.reduce((arr, node) => {
+      mappable: nodes.sort((a, b) => {
+        const aname = a.name.toUpperCase()
+        const bname = b.name.toUpperCase()
+        return aname === bname ? 0 : (aname < bname ? -1 : 1)
+      }).reduce((arr, node) => {
         const strips = []
         for (let i = 0; i < 4; i++) strips.push({node, index: i})
         return arr.concat(strips)
