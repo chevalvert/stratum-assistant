@@ -15,8 +15,12 @@ export default class Button extends C {
     this.opts = Object.assign({}, defaultOpts, opts || {})
 
     this.el = bel`
-    <button data-color='${opts.color}' onclick=${opts.onclick}>
-      ${raw(message)}
-    </button>`
+    <button
+      data-color='${opts.color}'
+      onclick=${e => {
+        this.el.blur()
+        opts.onclick(e)
+      }}
+    >${raw(message)}</button>`
   }
 }
