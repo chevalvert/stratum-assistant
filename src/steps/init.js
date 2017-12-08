@@ -2,15 +2,20 @@
 
 import Alert from 'components/alert'
 import ws from 'utils/websocket'
+import getUrlParam from 'utils/get-url-param'
+import Grid from 'components/grid'
 
 export default function (next) {
   const message = `Connecting to Stratum...`
   const alert = new Alert(message, { color: 'yellow' }).spawn()
 
+  const grid = new Grid({ cols: getUrlParam('w'),  rows: getUrlParam('h') }).spawn()
+
   ws.once('connected', nodes => {
     ws.send('light:all')
     alert.destroy()
     next(null, {
+      grid,
       mapped: [],    // strips that have been mapped, but not validated yet
       validated: [], // strips that have been mapped and validated
       trashed: [],   // strips that are not plugged

@@ -5,6 +5,7 @@ const path = require('path')
 const websocket = require('ws')
 const express = require('express')
 const Emitter = require('tiny-emitter')
+const args = require(path.join(__dirname, 'config.js'))
 const opn = require('opn')
 const app = express()
 
@@ -20,8 +21,8 @@ module.exports = function WebServer (opts) {
 
   const server = app.listen(opts.port, () => {
     let address = findFirstAvailableAddress()
-    opts.autoOpen && opn(`http://${address}:${opts.port}`)
-    console.log(`listenning to http://${address}:${opts.port}`)
+    opts.autoOpen && opn(`http://${address}:${opts.port}/?w=${args.width}&h=${args.height}`)
+    console.log(`listenning to http://${address}:${opts.port}/?w=${args.width}&h=${args.height}`)
   })
 
   const em = new Emitter()

@@ -9,8 +9,6 @@ import save from 'steps/save'
 import error from 'steps/error'
 import success from 'steps/success'
 
-import ws from 'utils/websocket'
-
 waterfall(
   [
     init,

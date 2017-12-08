@@ -3,7 +3,6 @@
 import bel from 'bel'
 import Alert from 'components/alert'
 import Button from 'components/button'
-import grid from 'components/grid'
 import breadcrumb from 'components/breadcrumb'
 import keyboard from 'utils/keyboard'
 import ws from 'utils/websocket'
@@ -41,7 +40,7 @@ export default function (state) {
   return new Promise ((resolve, reject) => {
     breadcrumb.select(2)
 
-    grid.boxes.forEach(box => {
+    state.grid.boxes.forEach(box => {
       box.disable()
     })
 

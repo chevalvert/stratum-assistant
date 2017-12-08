@@ -8,12 +8,12 @@ import Box from 'components/box'
 
 const defaultOpts = {
   margin: 2,
-  cols: 9,
-  rows: 10,
+  cols: 2,
+  rows: 2,
   onclick: function () {}
 }
 
-class Grid extends C {
+export default class Grid extends C {
   constructor(opts) {
     super()
     this.opts = Object.assign({}, defaultOpts, opts || {})
@@ -69,5 +69,3 @@ class Grid extends C {
     return bel`<line x1='${a.x}%' y1='${a.y}%' x2='${b.x}%' y2='${b.y}%' />`
   }
 }
-
-export default new Grid().spawn()

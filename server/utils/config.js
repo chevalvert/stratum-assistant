@@ -1,8 +1,17 @@
 const minimist = require('minimist')
 const minimistOpts = {
   boolean: ['open'],
-  alias: { open: ['o'] },
-  default: { open: false }
+  string: ['width', 'height'],
+  alias: {
+    open: ['o'],
+    width: ['w'],
+    height: ['h']
+  },
+  default: {
+    open: false,
+    width: 2,
+    height: 2
+  }
 }
 
 const argv = minimist(process.argv.slice(2), minimistOpts)

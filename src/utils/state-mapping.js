@@ -3,7 +3,6 @@
 import bel from 'bel'
 import Alert from 'components/alert'
 import Button from 'components/button'
-import grid from 'components/grid'
 import breadcrumb from 'components/breadcrumb'
 import keyboard from 'utils/keyboard'
   import ws from 'utils/websocket'
@@ -59,7 +58,7 @@ export default function (state) {
         })
       ])
 
-      grid.on('click', box => {
+      state.grid.on('click', box => {
         if (box.mapped) {
           // move node from state.mapped to state.mappable
           const index = state.mapped.findIndex(n => {
@@ -86,7 +85,7 @@ export default function (state) {
           ws.send('light', {name: current.node.name, index: current.index})
           breadcrumb.setText(`${current.node.name}#${current.index}`)
         } else {
-          grid.off('click')
+          state.grid.off('click')
           resolve(state)
         }
       }
