@@ -24,7 +24,7 @@ $ npm i -g chevalvert/stratum-assistant
 
 ## Usage
 ```sh
-$ stratum-assistant ~/stratum/config.mapping.json -o
+$ stratum-assistant ~/stratum/config.mapping.json -o --width=10 --height=9
 ```
 <sup>`-o, --open` opens the webpage when the server launches.</sup>
 
