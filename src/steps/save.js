@@ -16,11 +16,11 @@ function say (nodes) {
           color: 'green',
           onclick: e => {
             e.preventDefault()
-            ws.on('saved', err => {
+            ws.on('saved', ({ err, filename }) => {
               if (err) reject(err)
               else {
                 alert.destroy()
-                resolve()
+                resolve(filename)
               }
             })
             ws.send('save', nodes)
@@ -49,7 +49,8 @@ export default function (state, next) {
     nodes[name][strip.index] = [strip.box.position.i, strip.box.position.j]
   })
 
-  say(nodes).then(() => {
-    next(null, state)
+  say(nodes).then(filename => {
+    next(null, Object.assign({}, state, { success: filename }))
   })
+  .catch(err => next(err, state))
 }

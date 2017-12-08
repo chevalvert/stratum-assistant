@@ -10,7 +10,7 @@ import ws from 'utils/websocket'
 export default function (err, state) {
   breadcrumb.disable()
 
-  const message = `The mapping has been saved.`
+  const message = `The mapping has been saved to: <code>${state.success}</code>`
   const alert = new Alert(message, {
     color: 'green',
     buttons: [

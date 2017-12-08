@@ -26,8 +26,8 @@ web.on('light', data => {
   }
 })
 web.on('save', data => {
-  fs.outputJson(path.join(args.output, 'stratum.mapping.json'), { nodes: data }, { spaces: 2 }, err => {
-    web.broadcast('saved', err)
+  fs.outputJson(args.output, { nodes: data }, { spaces: 2 }, err => {
+    web.broadcast('saved', { err, filename: args.output })
   })
 })
 web.on('quit', () => process.exit())

@@ -1,3 +1,6 @@
+'use strict'
+
+const path = require('path')
 const minimist = require('minimist')
 const minimistOpts = {
   boolean: ['open'],
@@ -17,7 +20,7 @@ const minimistOpts = {
 const argv = minimist(process.argv.slice(2), minimistOpts)
 
 const args = {}
-args.output = argv._[0] || process.cwd()
+args.output = argv._[0] || path.join(process.cwd(), 'mapping.json')
 Object.keys(minimistOpts.alias).forEach(key => {
   if (
   argv.hasOwnProperty(key) !== undefined && typeof argv[key] !== 'undefined'
