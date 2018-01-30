@@ -1,6 +1,6 @@
 {
   "name": "stratum-assistant",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "stratum setup and mapping assistant",
   "bin": {
     "stratum-assistant": "server/index.js"
