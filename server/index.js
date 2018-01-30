@@ -5,6 +5,9 @@ const path = require('path')
 const fs = require('fs-extra')
 const args = require(path.join(__dirname, 'utils', 'config.js'))
 
+const kill = require(path.join(__dirname, 'utils', 'kill'))
+const hnode = require('hnode')
+
 const WebServer = require(path.join(__dirname, 'utils', 'web-server'))
 const web = new WebServer({
   autoOpen: args.open,
@@ -12,36 +15,50 @@ const web = new WebServer({
   public: path.join(__dirname, '..', 'build')
 })
 
-const hnode = require('hnode')
 const hnodeServer = new hnode.Server()
+const getNodes = () => hnodeServer.getAllNodes().map(node => ({ ip: node.ip, name: node.name }))
 
 // RX
 web.on('blackout', () => hnodeServer.blackout())
 web.on('light:all', () => hnodeServer.setAll([255, 255, 255]))
 web.on('light', data => {
   const node = hnodeServer.getNodeByName(data.name)
+  if (!node) return
   const color = data.color || [255, 255, 255]
-  if (node) {
-    node.setStrip(data.index, new Array(90).fill(color))
-  }
+  node.setStrip(data.index, new Array(90).fill(color))
 })
 web.on('save', data => {
   fs.outputJson(args.output, { nodes: data }, { spaces: 2 }, err => {
     web.broadcast('saved', { err, filename: args.output })
   })
 })
-web.on('quit', () => process.exit())
+web.on('quit', () => !args.standby && process.exit())
 
 // TX
-web.on('client', () => {
-  web.broadcast('connected', hnodeServer.getAllNodes().map(node => {
-    return { ip: node.ip, name: node.name }
-  }))
-})
-
 hnodeServer.on('newnode', node => {
-  node.on('online', () => web.broadcast('newnode'))
+  web.broadcast('connected', getNodes())
 })
 
+// Connection
+web.on('client', () => {
+  Promise.resolve()
+  .then(resolveStandby)
+  .then(() => kill('stratum'))
+  .then(() => !hnodeServer.isRunning ? connect() : reconnect())
+  .catch(err => console.log(err))
+})
 
-hnodeServer.start()
+function resolveStandby () {
+  // when args.standby === false, web will emit 'end-standby' after front loads
+  // when args.standby === true, web will emit 'end-standby' when front user decides so
+  web.broadcast('standby', args.standby)
+  return web.waitFor('end-standby')
+}
+
+function connect () {
+  hnodeServer.start()
+}
+
+function reconnect () {
+  web.broadcast('connected', getNodes())
+}

@@ -41,6 +41,9 @@ module.exports = function WebServer (opts) {
     on: em.on.bind(em),
     once: em.once.bind(em),
     off: em.off.bind(em),
+    waitFor: event => new Promise ((resolve, reject) => {
+      em.once(event, resolve)
+    }),
 
     get server () { return server },
     get wss () { return wss },

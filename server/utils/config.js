@@ -3,15 +3,17 @@
 const path = require('path')
 const minimist = require('minimist')
 const minimistOpts = {
-  boolean: ['open'],
+  boolean: ['open', 'standby'],
   string: ['width', 'height'],
   alias: {
     open: ['o'],
     width: ['w'],
-    height: ['h']
+    height: ['h'],
+    standby: ['s']
   },
   default: {
     open: false,
+    standby: false,
     width: 2,
     height: 2
   }
