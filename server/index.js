@@ -1,22 +1,25 @@
 #!/usr/bin/env node
 'use strict'
 
+process.title = 'strtm-s'
+
 const path = require('path')
 const fs = require('fs-extra')
 const args = require(path.join(__dirname, 'utils', 'config.js'))
 
-const kill = require(path.join(__dirname, 'utils', 'kill'))
 const hnode = require('hnode')
+const kill = require(path.join(__dirname, 'utils', 'kill'))
 
-const WebServer = require(path.join(__dirname, 'utils', 'web-server'))
-const web = new WebServer({
-  autoOpen: args.open,
-  port: 8888,
-  public: path.join(__dirname, '..', 'build')
-})
+kill(process.title).then(() => {
+  const WebServer = require(path.join(__dirname, 'utils', 'web-server'))
+  const web = new WebServer({
+    autoOpen: args.open,
+    port: 8888,
+    public: path.join(__dirname, '..', 'build')
+  })
 
-const hnodeServer = new hnode.Server()
-const getNodes = () => hnodeServer.getAllNodes().map(node => ({ ip: node.ip, name: node.name }))
+  const hnodeServer = new hnode.Server()
+  const getNodes = () => hnodeServer.getAllNodes().map(node => ({ ip: node.ip, name: node.name }))
 
 // RX
 web.on('blackout', () => hnodeServer.blackout())
@@ -24,7 +27,7 @@ web.on('light:all', () => hnodeServer.setAll([255, 255, 255]))
 web.on('light', data => {
   const node = hnodeServer.getNodeByName(data.name)
   if (!node) return
-  const color = data.color || [255, 255, 255]
+    const color = data.color || [255, 255, 255]
   node.setStrip(data.index, new Array(90).fill(color))
 })
 web.on('save', data => {
@@ -62,3 +65,5 @@ function connect () {
 function reconnect () {
   web.broadcast('connected', getNodes())
 }
+
+})
