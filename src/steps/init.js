@@ -9,7 +9,7 @@ export default function (next) {
   const message = `Connecting to Stratum...`
   const alert = new Alert(message, { color: 'yellow' }).spawn()
 
-  const grid = new Grid({ cols: getUrlParam('w'),  rows: getUrlParam('h') }).spawn()
+  const grid = new Grid({ cols: getUrlParam('w') || 1,  rows: getUrlParam('h') || 1 }).spawn()
 
   ws.once('connected', nodes => {
     ws.send('light:all')
