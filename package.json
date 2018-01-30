@@ -70,6 +70,7 @@
     "hnode": "github:hemisphere-project/stratum-hnode",
     "minimist": "^1.2.0",
     "opn": "^5.1.0",
+    "ps-node": "^0.1.6",
     "reconnectingwebsocket": "^1.0.0",
     "tiny-emitter": "^2.0.2",
     "ws": "^3.2.0",
