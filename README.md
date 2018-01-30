@@ -3,29 +3,26 @@
 *Stratum setup and mapping assistant.*
 
 <br>
-<br>
-<br>
 
 ## Stratum ecosystem
 - [`stratum`](https://github.com/chevalvert/stratum/) : stratum main app
-- `stratum-assistant` : stratum setup & mapping assistant
+- `stratum-assistant` : stratum setup and mapping assistant
 - [`stratum-hnode`](https://github.com/Hemisphere-Project/STRATUM) : leds UDP server + client
 - [`stratum-viewer`](https://github.com/chevalvert/stratum-viewer) : alternative UDP client
 
-<br>
-
 ## Installation
 
-```sh
-$ npm i -g chevalvert/stratum-assistant
-```
-
-<br>
+<pre>
+$ git clone https://github.com/chevalvert/stratum-assistant.git stratum-assistant
+$ cd stratum-assistant
+$ <a href="https://yarnpkg.com/en/docs/install">yarn</a> install
+$ yarn link
+</pre>
 
 ## Usage
-### Basic mode
+### Basic
 ```sh
-$ stratum-assistant <mapping.json> -o --width=10 --height=9
+$ stratum-assistant "path/to/stratum.mapping.<ENV>.json" --open
 ```
 <sup>`-o, --open` opens the webpage when the server launches.</sup>
 
@@ -34,16 +31,12 @@ Running `stratum-assistant` with the `--standby` flag will run it in **standby m
 
 This mode allows you to run `stratum-assistant` in parallel with [`stratum`](https://github.com/chevalvert/stratum/) without UDP port conflicts.
 ```sh
-$ stratum-assistant <mapping.json> --standby
+$ stratum-assistant "path/to/stratum.mapping.<ENV>.json" --standby
 ```
-<sup>`stratum-assistant` will effectively start when an user connects to the front-page and click on the _"leave standby mode"_ button.</sup>
-
-<br>
+<sup>`stratum-assistant` will effectively start when an user connects to the front-page and click on the _"leave standby mode"_ button, killing any instance of [`stratum`](https://github.com/chevalvert/stratum/) in the process.</sup>
 
 ## Development
 See [brocessing/`bro-start`](https://github.com/brocessing/bro-start).
-
-<br>
 
 ## License
 [MIT.](https://tldrlegal.com/license/mit-license)
