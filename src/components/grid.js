@@ -1,7 +1,6 @@
 'use strict'
 
 import bel from 'bel'
-import raw from 'bel/raw'
 
 import C from 'components/default'
 import Box from 'components/box'
@@ -14,7 +13,7 @@ const defaultOpts = {
 }
 
 export default class Grid extends C {
-  constructor(opts) {
+  constructor (opts) {
     super()
     this.opts = Object.assign({}, defaultOpts, opts || {})
 
@@ -28,8 +27,8 @@ export default class Grid extends C {
 
   coordToPercent (i, j) {
     return {
-      x: this.opts.margin + i / (this.opts.cols - 1) * (100 - this.opts.margin * 2),
-      y: this.opts.margin + j / (this.opts.rows - 1) * (100 - this.opts.margin * 2)
+      x: this.opts.margin + i / Math.max(1, this.opts.cols - 1) * (100 - this.opts.margin * 2),
+      y: this.opts.margin + j / Math.max(1, this.opts.rows - 1) * (100 - this.opts.margin * 2)
     }
   }
 
@@ -66,6 +65,6 @@ export default class Grid extends C {
   }
 
   _line (a, b) {
-    return bel`<line x1='${a.x}%' y1='${a.y}%' x2='${b.x}%' y2='${b.y}%' />`
+    return bel`<line x1='${a.x.toFixed(2)}%' y1='${a.y.toFixed(2)}%' x2='${b.x.toFixed(2)}%' y2='${b.y.toFixed(2)}%' />`
   }
 }

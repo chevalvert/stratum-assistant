@@ -1,7 +1,6 @@
 'use strict'
 
 import bel from 'bel'
-import raw from 'bel/raw'
 import C from 'components/default'
 
 const defaultOpts = {
@@ -17,8 +16,8 @@ export default class Box extends C {
     <rect
       i='${i}'
       j='${j}'
-      x='${pos.x}%'
-      y='${pos.y}%'
+      x='${pos.x.toFixed(2)}%'
+      y='${pos.y.toFixed(2)}%'
       onclick=${this.opts.onclick.bind(this)}
     />`
   }

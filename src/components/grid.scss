@@ -1,11 +1,17 @@
+$rect-size: 3rem;
+$rect-pulse-scale: 1.2;
+
 @keyframes pulse {
-  from { transform: translateX(-50%) translateY(-50%) scale(1); }
-  to { transform: translateX(-50%) translateY(-50%) scale(1.2); }
+  from { width: $rect-size; height: $rect-size; }
+  to {
+    width: $rect-size * $rect-pulse-scale;
+    height: $rect-size * $rect-pulse-scale;
+    transform: translate(-($rect-size / 2) * $rect-pulse-scale, -($rect-size / 2) * $rect-pulse-scale) }
 }
 
 svg.grid {
   position: fixed;
-  top: calc(50% - 3rem);
+  top: calc(50% - #{$rect-size});
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
 
@@ -20,10 +26,9 @@ svg.grid {
   }
 
   rect {
-    width: 3rem;
-    height: 3rem;
-    transform-origin: 50% 50%;
-    transform: translateX(-50%) translateY(-50%);
+    width: $rect-size;
+    height: $rect-size;
+    transform: translate(-$rect-size / 2, -$rect-size / 2);
 
     fill: $gray;
     @include easing(200ms, fill);
