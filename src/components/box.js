@@ -18,6 +18,8 @@ export default class Box extends C {
       j='${j}'
       x='${pos.x.toFixed(2)}%'
       y='${pos.y.toFixed(2)}%'
+      width='30px'
+      height='30px'
       onclick=${this.opts.onclick.bind(this)}
     />`
   }
