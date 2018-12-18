@@ -67,7 +67,7 @@
   "dependencies": {
     "express": "^4.16.1",
     "fs-extra": "^4.0.2",
-    "hnode": "github:hemisphere-project/stratum-hnode",
+    "hnode": "github:hemisphere-project/stratum-hnode#v0.2.0",
     "minimist": "^1.2.0",
     "opn": "^5.1.0",
     "ps-node": "^0.1.6",
