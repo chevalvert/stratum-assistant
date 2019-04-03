@@ -1,23 +1,22 @@
 # stratum-assistant [<img src="https://github.com/chevalvert.png?size=100" align="right">](http://chevalvert.fr/)
-
-*Stratum setup and mapping assistant.*
+**[Stratum](https://github.com/chevalvert?q=stratum)** setup and mapping assistant
 
 <br>
 
-## Stratum ecosystem
-- [`stratum`](https://github.com/chevalvert/stratum/) : stratum main app
-- `stratum-assistant` : stratum setup and mapping assistant
+## [Stratum](https://github.com/chevalvert?q=stratum) ecosystem
+- [`stratum`](https://github.com/chevalvert/stratum/) : Stratum main app
+- `stratum-assistant` : Stratum setup and mapping assistant
 - [`stratum-hnode`](https://github.com/Hemisphere-Project/STRATUM) : leds UDP server + client
-- [`stratum-viewer`](https://github.com/chevalvert/stratum-viewer) : alternative UDP client
+- [`stratum-viewer`](https://github.com/chevalvert/stratum-viewer) : Stratum `hnode` 3D previewer
+- [`stratum-documentation`](https://github.com/chevalvert/stratum-documentation) : Stratum hardware, hookup & misc guides
 
 ## Installation
-
-<pre>
+```sh
 $ git clone https://github.com/chevalvert/stratum-assistant.git stratum-assistant
 $ cd stratum-assistant
-$ <a href="https://yarnpkg.com/en/docs/install">yarn</a> install
-$ yarn link
-</pre>
+$ npm install
+$ npm link
+```
 
 ## Usage
 ### Basic
